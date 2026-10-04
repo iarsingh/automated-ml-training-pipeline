@@ -7,5 +7,6 @@ def check(body):
         raise InputError("body must be an object")
     failed = []
 
-    if int(body.get("rows") or 0) < 10: failed.append("too_few_rows")\n    if not body.get("target"): failed.append("missing_target")
+    if int(body.get("rows") or 0) < 10: failed.append("too_few_rows")
+    if not body.get("target"): failed.append("missing_target")
     return {"passed": not failed, "failed": failed, "applied": False}
