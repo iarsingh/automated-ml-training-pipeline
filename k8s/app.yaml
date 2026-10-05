@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: automated-ml-training-pipeline
+  labels:
+    app: automated-ml-training-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: automated-ml-training-pipeline
+  template:
+    metadata:
+      labels:
+        app: automated-ml-training-pipeline
+    spec:
+      containers:
+        - name: api
+          image: automated-ml-training-pipeline:local
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /v1/readyz
+              port: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: automated-ml-training-pipeline
+spec:
+  selector:
+    app: automated-ml-training-pipeline
+  ports:
+    - port: 80
+      targetPort: 8080
