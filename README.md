@@ -1,5 +1,12 @@
 # Automated ML Training Pipeline
 
+## Overview
+
+A small gate that decides whether an ML training run may go ahead. A run passes only when the dataset has at least 10 rows and the target is present, so obviously broken inputs stop before training. The check runs through a `POST /check` endpoint, and a versioned `/v1` ops API adds workspaces, tenant isolation, job approval and audit records.
+
+- **Built with:** Python, pytest, Docker Compose, GitHub Actions
+- **Scope:** Local ML engineering exercise with tests; it does not write a model to a registry or apply production changes.
+
 <!-- project-guide:start -->
 ## Project guide
 
